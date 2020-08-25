@@ -43,7 +43,6 @@ export const signupUserAccount = (formInfo, ownProps) => {
       }),
     });
     const userAccount = await userAccountPropmise.json();
-    console.log(userAccount);
 
     //error checking
     if (userAccount.keyValue) {
@@ -72,9 +71,7 @@ export const signupUserAccount = (formInfo, ownProps) => {
           body: formInfo.formData,
         }
       );
-
       const userAvatar = await userAvatarPromise.json();
-      console.log(userAvatar);
 
       dispatch({
         type: 'UPLOAD_AVATAR_AND_CREATE_USER',
@@ -113,6 +110,7 @@ export const loginUserAccount = (formInfo, ownProps) => {
   };
 };
 
+//sending the cv to the database to be stored and sending it as an email to the Employer
 export const dispatchCVToBD = (myUserInfo, ownProps) => {
   return async (dispatch, getState) => {
     const storeAppliedJobInfoInUserPromise = await fetch('/api/job/apply', {
@@ -132,10 +130,6 @@ export const dispatchCVToBD = (myUserInfo, ownProps) => {
 
     const storeAppliedJobInfoInUser = await storeAppliedJobInfoInUserPromise.json();
 
-    console.log(
-      `/api/job/apply/${storeAppliedJobInfoInUser._doc._id}/${ownProps.match.params._id}`
-    );
-
     const applyToJobPromise = await fetch(
       `/api/job/apply/${storeAppliedJobInfoInUser._doc._id}/${ownProps.match.params._id}`,
       {
@@ -144,6 +138,5 @@ export const dispatchCVToBD = (myUserInfo, ownProps) => {
       }
     );
     const applyToJob = await applyToJobPromise.json();
-    console.log(applyToJob);
   };
 };

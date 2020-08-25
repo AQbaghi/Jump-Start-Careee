@@ -8,7 +8,6 @@ const authReducer = (state = initState, action) => {
     };
   }
 
-  console.log(action.authenticatedUser);
   return state;
 };
 

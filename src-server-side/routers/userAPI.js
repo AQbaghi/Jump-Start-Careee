@@ -273,6 +273,7 @@ router.post('/api/job/apply', async (req, res) => {
     const company = await Company.findOne({ _id: jobAppliedTo.JobOwner });
     const userOfJobPost = await User.findOne({ _id: company.owner });
 
+    //adding the applied job info into the User model in databae
     user.jobsAppliedTo.push({
       email: userOfJobPost.email,
       applicantEmail: user.email,
@@ -288,7 +289,6 @@ router.post('/api/job/apply', async (req, res) => {
       .status(201)
       .send({ success: 'Your Application was Succesfully Sent', ...user });
   } catch (err) {
-    console.log(err);
     res.send(err);
   }
 });
@@ -317,12 +317,8 @@ router.post(
       const jobAppliedTo = await Job.findOne({
         _id: req.params.toUserId,
       });
-      console.log('lllllllllllllllllllllllllllllllllllllllllllllllllllllll');
-      console.log(jobAppliedTo);
-      console.log('lllllllllllllllllllllllllllllllllllllllllllllllllllllll');
       const company = await Company.findOne({ _id: jobAppliedTo.JobOwner });
       const toUser = await User.findOne({ _id: company.owner });
-      console.log(toUser);
 
       await sendCVToCompanyEmail(
         fromEmail.email,
@@ -334,7 +330,8 @@ router.post(
         req.file
       );
 
-      res.status(201).send('yaaaay sent');
+      await fromEmail.save();
+      res.status(201).send({ success: 'your cv was sent successfully' });
     } catch (err) {
       res.status(500).send(err);
     }

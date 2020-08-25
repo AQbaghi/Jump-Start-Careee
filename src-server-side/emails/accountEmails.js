@@ -56,7 +56,7 @@ const sendCVToCompanyEmail = (
       `,
       attachments: [
         {
-          filename: 'dummy.pdf',
+          filename: 'cv',
           content: applicantCV.buffer.toString('base64'),
           type: 'application/pdf',
           disposition: 'attachment',

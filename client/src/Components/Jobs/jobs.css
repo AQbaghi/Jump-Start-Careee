@@ -218,3 +218,22 @@ body {
   transition: 0.4s;
   cursor: pointer;
 }
+
+/* adding a dociment as a cv style */
+#document-image {
+  width: 10rem;
+  height: 10rem;
+}
+.continue-button {
+  border: none;
+  background-color: #88a5bd;
+  color: white;
+  width: 8rem;
+  height: 3rem;
+  font-size: 1.2rem;
+  transition: 0.3s;
+}
+.continue-button:hover {
+  background-color: #19222a;
+  transition: 0.3s;
+}
