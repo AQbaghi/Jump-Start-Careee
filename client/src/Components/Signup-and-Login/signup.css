@@ -1,0 +1,201 @@
+/*  styling the input feild for uploads */
+
+input[type='file'] {
+  display: none;
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.form-container {
+  display: block;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.form-inner-comtainer {
+  display: block;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 40rem;
+}
+
+.form-title {
+  margin: 0;
+  text-align: center;
+  font-size: 3rem;
+}
+
+.white-background {
+  background-color: white;
+}
+
+.form {
+  width: 100%;
+  position: relative;
+  height: 50px;
+  overflow: hidden;
+  margin: 1.4rem 0 1.4rem 0rem;
+}
+
+.form input {
+  width: 100%;
+  height: 100%;
+  color: #595f6e;
+  padding-top: 14px;
+  font-size: 1.1rem;
+  border: none;
+  outline: none;
+}
+
+.form label {
+  position: absolute;
+  bottom: 0;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-bottom: 1px solid #333;
+}
+
+.form label::after {
+  content: '';
+  position: absolute;
+  left: 0px;
+  bottom: 1;
+  height: 100%;
+  width: 100%;
+  border-bottom: 2px solid #5fa8d3;
+  transform: translateX(-100%);
+  transition: all 0.3s ease;
+}
+
+.content-name {
+  position: absolute;
+  bottom: 5px;
+  left: 0px;
+  transition: all 0.3s ease;
+}
+
+.form input:focus + .label-name .content-name,
+.form input:valid + .label-name .content-name {
+  transform: translateY(-150%);
+  font-size: 14px;
+  color: #88a5bd;
+}
+
+.form input:focus + .label-name::after,
+.form input:valid + .label-name::after {
+  transform: translateX(0%);
+}
+
+.signup-login-button {
+  border: none;
+  width: 6rem;
+  height: 2.5rem;
+  font-size: 20px;
+  color: white;
+  background-color: #5e7f9e;
+  margin: 1.5rem 0 0 0.5rem;
+}
+
+.error-box {
+  width: 100%;
+  height: 2rem;
+  z-index: 1;
+  color: red;
+  background: white;
+}
+.error-box p {
+  text-align: center;
+  padding-top: 0.3rem;
+}
+
+/* display image and upload image styles */
+.image-preview {
+  width: 300px;
+  min-height: 100px;
+  border: 2px silod #ddd;
+  margin-top: 15px;
+
+  /* default text */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #ccc;
+}
+
+.image-preview__image {
+  display: none;
+  width: 100%;
+}
+
+/* verification popup */
+#verification-popUp {
+  position: absolute;
+  width: 100%;
+  height: 117vh;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.479);
+}
+
+#popUp {
+  position: relative;
+  margin: 0 auto;
+  padding: 2rem 4rem;
+  top: 30vh;
+  width: 80%;
+  max-width: 25rem;
+  height: 16rem;
+  background-color: white;
+  font-size: 1.6;
+}
+
+#popUp img {
+  width: 3rem;
+  height: 3rem;
+  opacity: 0.4;
+  position: absolute;
+  left: 29.5rem;
+  top: 0.3rem;
+}
+#popUp img:hover {
+  opacity: 0.8;
+}
+
+@media only screen and (max-width: 750px) {
+  #popUp {
+    padding: 1rem 2rem;
+    width: 80%;
+    max-width: 20rem;
+    height: 16rem;
+  }
+  .form-inner-comtainer {
+    margin: 0 auto;
+    width: 80%;
+    max-width: 24rem;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  #popUp {
+    padding: 1rem 2rem;
+    width: 80%;
+    max-width: 15rem;
+    height: 16rem;
+  }
+  .form-inner-comtainer {
+    margin: 0 auto;
+    width: 60%;
+    max-width: 18rem;
+  }
+}

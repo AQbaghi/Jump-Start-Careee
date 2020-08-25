@@ -1,0 +1,220 @@
+.jobs {
+  margin: 0px;
+  padding: 0;
+  justify-content: space-around;
+}
+
+/* standard form styles */
+
+body {
+  background: #f2f2f2;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.search-bar {
+  width: 100%;
+  height: 4rem;
+  background-color: #19222a;
+}
+
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+  top: 0.5rem;
+  left: 4%;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid #19222a;
+  border-right: none;
+  padding: 5px;
+  height: 30px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9dbfaf;
+}
+
+.searchTerm:focus {
+  color: #19222a;
+  font-size: 16px;
+  transition: 0.2s;
+  text-align: unset;
+}
+
+.searchButton {
+  width: 60px;
+  height: 46px;
+  border: 1px solid #19222a;
+  background: #19222a;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.searchButton:focus {
+  outline: none;
+  background-color: #19222a;
+}
+
+.searchButton i:hover {
+  transform: rotate(360deg);
+  transition: 0.6s;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap {
+  width: 50%;
+  min-width: 300px;
+  position: relative;
+}
+
+.job-postings img {
+  border-radius: 100%;
+  height: 4rem;
+  width: 4rem;
+}
+
+/* jobs dashbaurd */
+
+.jobs-dashbaurd {
+  display: grid;
+  grid-template-columns: 18rem auto;
+  grid-auto-rows: minmax(90vh, auto);
+}
+
+/* the job post inself */
+
+.job-post {
+  display: block;
+  text-decoration: none;
+  color: #333;
+  transition: 0.4s;
+  background-color: white;
+  margin: 0rem 0rem 1rem 0;
+  padding: 0.1rem 1rem 1rem 2.5rem;
+  border-radius: 5px;
+}
+
+.job-post:hover {
+  transition: 0.4s;
+  box-shadow: #19222a 0px 1px 10px 0px;
+}
+
+#company-info {
+  display: block;
+  padding-left: 1.6rem;
+}
+
+.jobPost-header {
+  margin-top: 0.2rem;
+  display: inline-flex;
+}
+
+.job-post .job-title {
+  position: relative;
+  margin: 1rem;
+  bottom: 0.5rem;
+}
+
+.job-post .company-name {
+  position: absolute;
+  font-size: 1.5rem;
+  margin-top: -1rem;
+  margin-left: 0.6rem;
+}
+.job-post .location {
+  position: relative;
+  font-size: 1.5rem;
+  top: 0.7rem;
+}
+.job-post .salary {
+  position: relative;
+  top: 0rem;
+}
+.job-post .time-of-post {
+  position: relative;
+  top: 1rem;
+  right: 1.4rem;
+  color: #444;
+}
+
+@media only screen and (max-width: 600px) {
+  .job-post {
+    padding-left: 4rem;
+  }
+  .jobs-dashbaurd {
+    display: block;
+  }
+  .previous-searches {
+    border: black 1px solid;
+    position: absolute;
+    opacity: 0;
+    width: 0px;
+  }
+  .job-postings {
+    min-height: 90vh;
+  }
+  #company-info {
+    padding-left: 0rem;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .job-post {
+    padding-left: 4rem;
+  }
+  #company-info {
+    padding-left: 0rem;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .search {
+    width: 100%;
+    position: relative;
+    display: flex;
+    left: 96%;
+  }
+}
+
+/* font styles */
+
+#jobTitle-jobPost {
+  color: #19222a;
+}
+
+.apply-to-job {
+  width: 8rem;
+  padding-top: 0.5rem;
+  height: 2.5rem;
+  font-size: 1.2rem;
+  border: none;
+  color: white;
+  background: #19222a;
+  text-align: center;
+  transition: 0.4s;
+}
+.apply-to-job:hover {
+  background: #88a5bd;
+  transition: 0.4s;
+  cursor: pointer;
+}
+.delete-job-post {
+  width: 10rem;
+  padding-top: 0.6rem;
+  height: 2.5rem;
+  font-size: 1.2rem;
+  border: none;
+  color: white;
+  background: #19222a;
+  text-align: center;
+  transition: 0.4s;
+}
+.delete-job-post:hover {
+  background: #19222a;
+  transition: 0.4s;
+  cursor: pointer;
+}

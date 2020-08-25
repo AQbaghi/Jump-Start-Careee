@@ -1,0 +1,37 @@
+{
+  "name": "web-dev-seaker",
+  "version": "1.0.0",
+  "description": "A MongoDB, Express, React, and Node.js web-app for people who want to land their first job in the Web-Dev Industy",
+  "main": "index.js",
+  "scripts": {
+    "client-install": "cd client && npm install",
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "client": "cd client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\" "
+  },
+  "author": "AbdalQader Baghi",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^7.2.3",
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.2.0",
+    "dotenv": "^8.2.0",
+    "env-cmd": "^10.1.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.21",
+    "multer": "^1.4.2",
+    "nodemailer": "^6.4.11",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "sharp": "^0.25.4",
+    "validator": "^13.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
