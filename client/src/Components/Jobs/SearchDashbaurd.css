@@ -1,5 +1,5 @@
 .dashbaurd {
-  background-image: url('../../images/4.jpg');
+  background-image: url('../../images/4.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -8,8 +8,8 @@
 }
 
 .header {
-  width: 80%;
-  max-width: 60rem;
+  width: 70%;
+  max-width: 34rem;
   margin: 0 auto;
 }
 
@@ -29,7 +29,6 @@
 #job-search-inputs {
   position: fixed;
   width: 100%;
-  top: 5rem;
 }
 
 .job-search-form .input-feild input,

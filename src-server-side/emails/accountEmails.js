@@ -48,12 +48,10 @@ const sendCVToCompanyEmail = (
       to: jobPostOwnerEmail,
       from: 'aqbaghi@atomiccode.uk',
       subject: 'You Have a new Applicant',
-      text: `
-      ${applicantFirstName} ${applicantLastName} is interested in the Position you have posted on Jump Start Career, and would like you to review their cv.
-        Applicants Email: ${applicantEmail}
-        Title of Position Applied To: ${jobTitle}
-        Link to the Job Post: ${process.env.FRONT_END_URL}/jobs/${jobId}
-      `,
+      html: `<h2> ${applicantFirstName} ${applicantLastName} is interested in the Position you have posted on Jump Start Career, and would like you to review their cv.</h2>
+      <h3> Applicants Email: ${applicantEmail}</h3>
+      <h3> Title of Position Applied To: ${jobTitle}</h3>
+      <a href="${process.env.FRONT_END_URL}/jobs/${jobId}">Job Post link on Jumo Start Career</a>`,
       attachments: [
         {
           filename: 'cv',

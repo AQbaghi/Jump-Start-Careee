@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import jumpStartCareerSVG from '../../images/JUMP2.svg';
+import jumpStartCareerSVG from '../../images/jump-start-career.svg';
 import './SearchDashbaurd.css';
 
 //loaded is a variable to chech if the page loaded the job post data, if not the function will not be called again

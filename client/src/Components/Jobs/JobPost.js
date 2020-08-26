@@ -4,11 +4,15 @@ import { _arrayBufferToBase64 } from '../../SettingsAndImageProcessors/_arrayBuf
 import { getJobDetailsFromDB } from '../../store/actions/jobActions.js';
 import defaultCompanyImage from '../../images/PRIVATE-LIMITE.jpg';
 
+let applied = false;
+let showApplyButton = true;
+
 class JobPost extends Component {
   componentDidMount() {
     this.props.getJobPostDetails();
   }
 
+  //if applying to job and authenticated, take me to apply pageXOffset, else take me to sign up page
   applyToJobClickHandler = () => {
     console.log(this.props.userAccount);
     if (this.props.userAccount) {
@@ -21,9 +25,27 @@ class JobPost extends Component {
       this.props.history.push('/Signup');
     }
   };
+
+  //this component is the applied, apply to job and and delete job post logic
+  ApplyButtonComponent = () => {
+    if (applied) {
+      return <div className="already-applied-button">Already Applied</div>;
+    } else {
+      return (
+        <div>
+          {showApplyButton ? (
+            <div className="apply-to-job" onClick={this.applyToJobClickHandler}>
+              Apply Now
+            </div>
+          ) : (
+            <div className="delete-job-post">Delete Job Post</div>
+          )}
+        </div>
+      );
+    }
+  };
+
   render() {
-    console.log(this.props);
-    let showApplyButton = true;
     let num = 1;
 
     //chexk if apply to job button should show up, or delete job post button should
@@ -34,6 +56,15 @@ class JobPost extends Component {
       ) {
         showApplyButton = false;
       }
+    }
+
+    //check if this job has been previously applies to by user
+    if (this.props.userAccount.jobsAppliedTo) {
+      applied = this.props.userAccount.jobsAppliedTo.map((jobAppliedo) => {
+        if (jobAppliedo.jobId === this.props.jobPostDetails.job._id) {
+          return true;
+        }
+      });
     }
 
     let companyPictureBuffer = null;
@@ -105,13 +136,8 @@ class JobPost extends Component {
             </div>
           ) : null}
           <p>Postted at: {this.props.jobPostDetails.job.createdAt}</p>
-          {showApplyButton ? (
-            <div className="apply-to-job" onClick={this.applyToJobClickHandler}>
-              Apply Now
-            </div>
-          ) : (
-            <div className="delete-job-post">Delete Job Post</div>
-          )}
+
+          <this.ApplyButtonComponent />
         </div>
       </div>
     );
