@@ -39,7 +39,7 @@ class Profile extends Component {
         )}`;
       }
     }
-
+    console.log(this.props.account.auth.userAccount.jobsAppliedTo);
     return (
       <div className="profile profile-content">
         <div className="profile-cover"></div>
@@ -72,21 +72,20 @@ class Profile extends Component {
                 Jobs Applied to
               </div>
               <ul className="applied-jobs-list applied-jobs-list-closed">
-                <li>
-                  <a href="/">Job 1</a>
-                </li>
-                <li>
-                  <a href="/">Job 2</a>
-                </li>
-                <li>
-                  <a href="/">Job 3</a>
-                </li>
-                <li>
-                  <a href="/">Job 4</a>
-                </li>
-                <li>
-                  <a href="/">Job 5</a>
-                </li>
+                {this.props.account.auth.userAccount.jobsAppliedTo
+                  ? this.props.account.auth.userAccount.jobsAppliedTo.map(
+                      (appliedJob) => {
+                        let jobURL = `/jobs/${appliedJob.jobId}`;
+                        return (
+                          <Link key={appliedJob.jobId} to={jobURL}>
+                            <h3>{appliedJob.jobTitle}</h3>
+                            <p>{appliedJob.salary}</p>
+                            <p>{appliedJob.location}</p>
+                          </Link>
+                        );
+                      }
+                    )
+                  : null}
               </ul>
             </div>
 

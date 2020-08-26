@@ -4,17 +4,30 @@ import { _arrayBufferToBase64 } from '../../SettingsAndImageProcessors/_arrayBuf
 import { getJobDetailsFromDB } from '../../store/actions/jobActions.js';
 import defaultCompanyImage from '../../images/PRIVATE-LIMITE.jpg';
 
-let applied = false;
-let showApplyButton = true;
-
 class JobPost extends Component {
-  componentDidMount() {
-    this.props.getJobPostDetails();
-  }
+  //state of the apply or delete button
+
+  DisplayImageHandler = () => {
+    let companyPictureBuffer = null;
+    let companyPicture = null;
+    console.log('gooood booooy');
+    if (this.props.jobPostDetails.job.companyAvatar) {
+      //getting the image buffer from jobs list array
+      companyPictureBuffer = this.props.jobPostDetails.job.companyAvatar.data;
+      //injecting the company picture into the src for the img tag
+      companyPicture = `data:image/jpg;base64,${_arrayBufferToBase64(
+        companyPictureBuffer
+      )}`;
+    }
+    return (
+      <div>
+        <img id="companyImage" src={companyPicture} />
+      </div>
+    );
+  };
 
   //if applying to job and authenticated, take me to apply pageXOffset, else take me to sign up page
   applyToJobClickHandler = () => {
-    console.log(this.props.userAccount);
     if (this.props.userAccount) {
       if (this.props.userAccount.email) {
         this.props.history.push('/apply/' + this.props.match.params._id);
@@ -26,63 +39,41 @@ class JobPost extends Component {
     }
   };
 
-  //this component is the applied, apply to job and and delete job post logic
-  ApplyButtonComponent = () => {
-    if (applied) {
-      return <div className="already-applied-button">Already Applied</div>;
-    } else {
-      return (
-        <div>
-          {showApplyButton ? (
-            <div className="apply-to-job" onClick={this.applyToJobClickHandler}>
-              Apply Now
-            </div>
-          ) : (
-            <div className="delete-job-post">Delete Job Post</div>
-          )}
-        </div>
-      );
+  componentWillMount() {
+    this.props.getJobPostDetails(this.props);
+  }
+  componentDidMount() {
+    this.props.getJobPostDetails(this.props);
+  }
+  ApplyButtonLogicalComponent = () => {
+    if (this.props.jobPostDetails.companyInfo._id) {
+      if (this.props.jobPostDetails.buttonState.applyButton) {
+        return (
+          <div className="apply-to-job" onClick={this.applyToJobClickHandler}>
+            Apply Now
+          </div>
+        );
+      }
+      if (this.propsjobPostDetails.buttonState.AlreadyApplied) {
+        return <div className="already-applied-button">Applied</div>;
+      }
+      if (this.props.jobPostDetails.buttonState.deleteJobPostButton) {
+        return <div className="apply-to-job">Delete Jop Post</div>;
+      }
+      return this;
     }
+    return this;
   };
 
   render() {
     let num = 1;
-
-    //chexk if apply to job button should show up, or delete job post button should
-    if (this.props.userAccount.companyInfo) {
-      if (
-        this.props.jobPostDetails.companyInfo._id ===
-        this.props.userAccount.companyInfo._id
-      ) {
-        showApplyButton = false;
-      }
-    }
-
-    //check if this job has been previously applies to by user
-    if (this.props.userAccount.jobsAppliedTo) {
-      applied = this.props.userAccount.jobsAppliedTo.map((jobAppliedo) => {
-        if (jobAppliedo.jobId === this.props.jobPostDetails.job._id) {
-          return true;
-        }
-      });
-    }
-
-    let companyPictureBuffer = null;
-    let companyPicture = null;
-    if (this.props.jobPostDetails.job.companyAvatar) {
-      //getting the image buffer from jobs list array
-      companyPictureBuffer = this.props.jobPostDetails.job.companyAvatar.data;
-      //injecting the company picture into the src for the img tag
-      companyPicture = `data:image/jpg;base64,${_arrayBufferToBase64(
-        companyPictureBuffer
-      )}`;
-    }
+    console.log(this.props);
 
     return (
       <div className="job-post jobPost-details">
         <div id="company-info">
           {this.props.jobPostDetails.job.companyAvatar ? (
-            <img id="companyImage" src={companyPicture} />
+            <this.DisplayImageHandler />
           ) : (
             <img id="companyImage" src={defaultCompanyImage} />
           )}
@@ -136,13 +127,30 @@ class JobPost extends Component {
             </div>
           ) : null}
           <p>Postted at: {this.props.jobPostDetails.job.createdAt}</p>
-
-          <this.ApplyButtonComponent />
+          {this.props.jobPostDetails?.buttonState?.signUp ? (
+            <div className="apply-to-job" onClick={this.applyToJobClickHandler}>
+              Apply Now
+            </div>
+          ) : null}
+          {this.props.jobPostDetails?.buttonState?.AlreadyApplied ? (
+            <div className="already-applied-button">Applied</div>
+          ) : null}
+          {this.props.jobPostDetails?.buttonState?.deleteJobPostButton ? (
+            <div className="apply-to-job">Delete Jop Post</div>
+          ) : null}
         </div>
       </div>
     );
   }
 }
+
+// {showApplyButton ? (
+//   <div className="apply-to-job" onClick={this.applyToJobClickHandler}>
+//     Apply Now
+//   </div>
+// ) : (
+//   <div className="delete-job-post">Delete Job Post</div>
+// )}
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -152,8 +160,8 @@ const mapStateToProps = (state, ownProps) => {
 };
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    getJobPostDetails: () => {
-      dispatch(getJobDetailsFromDB(ownProps));
+    getJobPostDetails: (state) => {
+      dispatch(getJobDetailsFromDB(ownProps, state));
     },
   };
 };

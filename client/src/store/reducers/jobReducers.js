@@ -19,6 +19,7 @@ const jobReducer = (state = initState, action) => {
     state = {
       ...state,
       jobPostDetails: action.jobPostDetails,
+      buttonState: action.buttonState,
     };
   }
 

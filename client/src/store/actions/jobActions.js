@@ -34,16 +34,64 @@ export const getMyCompanyJobsFromDB = (owner) => {
   };
 };
 
-export const getJobDetailsFromDB = (ownProps) => {
+export const getJobDetailsFromDB = (ownProps, state) => {
   return async (dispatch, getState) => {
     const jobPromise = await fetch(
       `/api/job/info/${ownProps.match.params._id}`
     );
     const jobPostDetails = await jobPromise.json();
 
+    console.log(jobPostDetails);
+    console.log(ownProps);
+    console.log(state);
+
+    let buttonState = {
+      signUp: false,
+      applyButton: false,
+      AlreadyApplied: false,
+      deleteJobPostButton: false,
+    };
+
+    //setting up the logic for the buttons
+
+    if (!state.userAccount.email) {
+      buttonState.signUp = true;
+      buttonState.applyButton = false;
+      buttonState.AlreadyApplied = false;
+      buttonState.deleteJobPostButton = false;
+    }
+    if (state.userAccount.email) {
+      buttonState.signUp = true;
+      buttonState.applyButton = false;
+      buttonState.AlreadyApplied = false;
+      buttonState.deleteJobPostButton = false;
+    }
+    if (state.userAccount.jobsAppliedTo) {
+      state.userAccount.jobsAppliedTo.map((jobAppliedTo) => {
+        if (jobAppliedTo.jobId === jobPostDetails.job._id) {
+          console.log('ooooooo');
+          buttonState.signUp = false;
+          buttonState.applyButton = false;
+          buttonState.AlreadyApplied = true;
+          buttonState.deleteJobPostButton = false;
+        }
+      });
+    }
+    if (state.userAccount.companyInfo) {
+      if (
+        state.userAccount.companyInfo._id === jobPostDetails.companyInfo._id
+      ) {
+        console.log('lllllllllllllllllllllllllllllllll');
+        buttonState.signUp = false;
+        buttonState.applyButton = false;
+        buttonState.AlreadyApplied = false;
+        buttonState.deleteJobPostButton = true;
+      }
+    }
+
     dispatch({
       type: 'GET_JOB_POST_DETAILS',
-      jobPostDetails,
+      jobPostDetails: { ...jobPostDetails, buttonState },
     });
   };
 };

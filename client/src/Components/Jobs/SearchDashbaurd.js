@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import jumpStartCareerSVG from '../../images/jump-start-career.svg';
+import jumpStartCareerSVG from '../../images/jump-start-career-2.svg';
 import './SearchDashbaurd.css';
 
 //loaded is a variable to chech if the page loaded the job post data, if not the function will not be called again
@@ -17,6 +17,8 @@ class SearchDashbaurd extends Component {
       <div className="dashbaurd">
         <div id="job-search-inputs">
           <form onSubmit={this.searchForJob} className="job-search-form">
+            <br></br>
+            <br></br>
             <div className="header">
               <img src={jumpStartCareerSVG} />
             </div>

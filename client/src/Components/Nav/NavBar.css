@@ -41,7 +41,7 @@
   width: 4rem;
   height: 4rem;
   background-color: #19222a;
-  border: solid 4px #88a5bd;
+  border: solid 4px rgba(255, 255, 255, 0.74);
   border-radius: 100%;
   left: 15.8rem;
   top: 24rem;
