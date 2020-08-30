@@ -51,23 +51,36 @@ router.get('/api/job/all-job', async (req, res) => {
   let searchCriteriaObject = {};
   console.log(req.query);
   //finding any related data corisponding to search criteria via $or mongodb and $regex mongodb
-  // searchCriteriaObject = {
-  //   $or: [
-  //     { jobTitle: { $regex: req.query.jobTitle, $options: 'i' } },
-  //     { catagory: { $regex: req.query.jobTitle, $options: 'i' } },
-  //     { keyWords: { $regex: req.query.jobTitle, $options: 'i' } },
-  //     { companyName: { $regex: req.query.jobTitle, $options: 'i' } },
-  //   ],
-  // };
-  let soc = {
+  jobTitlesSearchCriteriaObject = {
+    $or: [
+      { jobTitle: { $regex: req.query.jobTitle, $options: 'i' } },
+      { catagory: { $regex: req.query.jobTitle, $options: 'i' } },
+      { keyWords: { $regex: req.query.jobTitle, $options: 'i' } },
+      { companyName: { $regex: req.query.jobTitle, $options: 'i' } },
+    ],
+  };
+  jobAdressSearchCriteriaObject = {
     lat: req.query.lat,
     lng: req.query.lng,
   };
-  console.log(soc);
+
+  let bigLat = Number(req.query.lat) + 0.666;
+  let smallLat = Number(req.query.lat) - 0.666;
+  let bigLng = Number(req.query.lng) + 0.666;
+  let smallLng = Number(req.query.lng) - 0.666;
+
+  soc = {
+    $and: [
+      { lat: { $gte: smallLat } },
+      { lat: { $lte: bigLat } },
+      { lng: { $gte: smallLng } },
+      { lng: { $lte: bigLng } },
+    ],
+  };
+
   try {
     const job = await Job.find({
-      lat: req.query.lat,
-      lng: req.query.lng,
+      $and: [jobTitlesSearchCriteriaObject, soc],
     })
       .limit(parseInt(req.query.limit))
       .skip(parseInt(req.query.skip))
