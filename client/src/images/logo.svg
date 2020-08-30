@@ -1,0 +1,34 @@
+<svg width="1230" height="1235" viewBox="0 0 1230 1235" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Rectangle 1">
+<rect x="17.4997" y="710.498" width="865.186" height="844.45" transform="rotate(-53.1363 17.4997 710.498)" stroke="#19AD78" stroke-width="25"/>
+<rect x="17.4997" y="710.498" width="865.186" height="844.45" transform="rotate(-53.1363 17.4997 710.498)" stroke="url(#paint0_linear)" stroke-width="25"/>
+</g>
+<path id="J" d="M627.811 705.791C645.657 710.79 657.691 702.183 663.913 679.971L685.382 603.321C678.13 600.044 674.045 598.069 673.126 597.396C671.436 596.507 670.879 595.036 671.454 592.982L673.72 584.893L721.867 598.379L719.601 606.467C719.026 608.522 717.657 609.454 715.495 609.263L704.117 608.361L682.755 684.626C676.138 708.25 663.513 721.191 644.881 723.45C638.841 724.25 632.547 723.734 625.999 721.899C618.937 719.922 612.513 717.153 606.725 713.593C609.668 705.556 611.633 701.26 612.619 700.705C613.606 700.151 614.741 700.053 616.024 700.413C617.437 700.809 618.906 701.497 620.431 702.478C622.434 703.731 624.912 704.771 627.865 705.599L627.811 705.791Z" fill="#00A876"/>
+<g id="Rectangle 2" style="mix-blend-mode:darken">
+<rect x="471.499" y="121.058" width="717.912" height="741.548" transform="rotate(28.5532 471.499 121.058)" stroke="#19666B" stroke-width="34"/>
+<rect x="471.499" y="121.058" width="717.912" height="741.548" transform="rotate(28.5532 471.499 121.058)" stroke="url(#paint1_linear)" stroke-width="34"/>
+</g>
+<g id="Rectangle 3">
+<rect x="441.192" y="216.352" width="588" height="635" transform="rotate(19.7752 441.192 216.352)" stroke="#26549D" stroke-width="24"/>
+<rect x="441.192" y="216.352" width="588" height="635" transform="rotate(19.7752 441.192 216.352)" stroke="url(#paint2_linear)" stroke-width="24"/>
+</g>
+<rect id="Rectangle 4" x="406.235" y="311.587" width="507.47" height="532.57" transform="rotate(10.0183 406.235 311.587)" stroke="#5B76A3" stroke-width="20"/>
+<rect id="Rectangle 5" x="396" y="397" width="429" height="437" stroke="#6185BE" stroke-width="16"/>
+<rect id="Rectangle 6" x="404.294" y="449.106" width="363.375" height="381.54" transform="rotate(-7.74698 404.294 449.106)" stroke="#1D5F85" stroke-width="9"/>
+<rect id="Rectangle 7" x="413.172" y="498.769" width="315.32" height="325.934" transform="rotate(-16.3577 413.172 498.769)" stroke="#1E7E93" stroke-width="8"/>
+<rect id="Rectangle 8" x="429.317" y="559.232" width="254.011" height="274.178" transform="rotate(-30.9043 429.317 559.232)" stroke="#2AA69E" stroke-width="8"/>
+<defs>
+<linearGradient id="paint0_linear" x1="97.3031" y1="684.411" x2="445.093" y2="1582.45" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="#046CCB"/>
+</linearGradient>
+<linearGradient id="paint1_linear" x1="206.28" y1="799.313" x2="1550.69" y2="243.63" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="0.796875" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint2_linear" x1="60.5567" y1="1754.44" x2="899.19" y2="-114.508" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="0.962889" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>

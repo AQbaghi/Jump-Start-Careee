@@ -12,9 +12,12 @@ router.post('/api/job/post', auth, async (req, res) => {
     const company = await Company.findOne({
       owner: req.user._id,
     });
+
     const job = new Job({
       ...req.body,
-      location: company.location,
+      address: company.address,
+      lat: company.lat,
+      lng: company.lng,
       JobOwner: company._id,
       companyName: company.companyName,
       companyAvatar: company.avatar,
@@ -48,17 +51,24 @@ router.get('/api/job/all-job', async (req, res) => {
   let searchCriteriaObject = {};
   console.log(req.query);
   //finding any related data corisponding to search criteria via $or mongodb and $regex mongodb
-  searchCriteriaObject = {
-    $or: [
-      { jobTitle: { $regex: req.query.jobTitle, $options: 'i' } },
-      { catagory: { $regex: req.query.jobTitle, $options: 'i' } },
-      { keyWords: { $regex: req.query.jobTitle, $options: 'i' } },
-      { companyName: { $regex: req.query.jobTitle, $options: 'i' } },
-    ],
-    location: { $regex: req.query.location, $options: 'i' },
+  // searchCriteriaObject = {
+  //   $or: [
+  //     { jobTitle: { $regex: req.query.jobTitle, $options: 'i' } },
+  //     { catagory: { $regex: req.query.jobTitle, $options: 'i' } },
+  //     { keyWords: { $regex: req.query.jobTitle, $options: 'i' } },
+  //     { companyName: { $regex: req.query.jobTitle, $options: 'i' } },
+  //   ],
+  // };
+  let soc = {
+    lat: req.query.lat,
+    lng: req.query.lng,
   };
+  console.log(soc);
   try {
-    const job = await Job.find(searchCriteriaObject)
+    const job = await Job.find({
+      lat: req.query.lat,
+      lng: req.query.lng,
+    })
       .limit(parseInt(req.query.limit))
       .skip(parseInt(req.query.skip))
       .sort({ createdAt: sortValue });

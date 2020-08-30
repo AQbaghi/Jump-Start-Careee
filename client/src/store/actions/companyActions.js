@@ -16,7 +16,9 @@ export const startCompany = (formInfo, ownProps) => {
       body: JSON.stringify({
         companyName: formInfo.companyName,
         description: formInfo.companyDescription,
-        location: formInfo.location,
+        address: formInfo.address,
+        lat: formInfo.lat,
+        lng: formInfo.lng,
       }),
     });
     const companyInfo = await companyPropmise.json();

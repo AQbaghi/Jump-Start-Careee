@@ -1,26 +1,50 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from 'react-places-autocomplete';
 import { startCompany } from '../../store/actions/companyActions.js';
 import '../Signup-and-Login/signup.css';
 
 class StartCompany extends Component {
   state = {
-    companyName: null,
-    description: null,
-    location: null,
+    address: '',
+    companyName: '',
+    description: '',
     avatar: null,
     formData: null,
+    lat: null,
+    lng: null,
+  };
+
+  adressSelectHandler = async (value) => {
+    const adressResults = await geocodeByAddress(value);
+    const latLng = await getLatLng(adressResults[0]);
+
+    this.setState(() => {
+      return {
+        address: value,
+        lat: latLng.lat,
+        lng: latLng.lng,
+      };
+    });
+
+    console.log(this.state.coordinates);
   };
 
   inputChangeHandler = (e) => {
+    console.log(e.target.id);
     this.setState({
       [e.target.id]: e.target.value,
     });
   };
 
-  submitHandler = (e) => {
+  submitHandler = async (e) => {
     e.preventDefault();
-    this.props.dispatchCompanyInfo(this.state);
+    await this.adressSelectHandler(this.state.address);
+    console.log(this.state);
+    await this.props.dispatchCompanyInfo(this.state);
   };
 
   selectImageHandler = (e) => {
@@ -32,8 +56,8 @@ class StartCompany extends Component {
 
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      const formData = new FormData();
+      let reader = new FileReader();
+      let formDataObj = new FormData();
       //display image
       prefviewDefaultText.style.display = 'none';
       previewImage.style.display = 'block';
@@ -41,15 +65,15 @@ class StartCompany extends Component {
       //inload event and set state to image data url
       reader.addEventListener('load', () => {
         previewImage.setAttribute('src', reader.result);
+
         this.setState({
-          ...this.state,
-          avatar: reader,
-          formData: formData,
+          avatar: reader.result,
+          formData: formDataObj,
         });
       });
 
-      formData.append('avatar', file);
-      console.log(formData);
+      formDataObj.append('avatar', file);
+      console.log(formDataObj);
 
       //reading the file as data url
       reader.readAsDataURL(file);
@@ -58,6 +82,10 @@ class StartCompany extends Component {
       prefviewDefaultText.style.display = null;
       previewImage.style.display = null;
     }
+  };
+
+  handleChange = (address) => {
+    this.setState({ address });
   };
 
   render() {
@@ -97,18 +125,54 @@ class StartCompany extends Component {
                 <span className="content-name">Company Description</span>
               </label>
             </div>
-            <div className="form">
-              <input
-                type="text"
-                name="location"
-                id="location"
-                required
-                autoComplete="off"
-                onChange={this.inputChangeHandler}
-              />
-              <label htmlFor="location" className="label-name">
-                <span className="content-name">Company Location</span>
-              </label>
+            <div className="city-form">
+              <PlacesAutocomplete
+                value={this.state.address}
+                onChange={this.handleChange}
+              >
+                {({
+                  getInputProps,
+                  suggestions,
+                  getSuggestionItemProps,
+                  loading,
+                }) => {
+                  return (
+                    <div className="suggested-places">
+                      <input
+                        {...getInputProps({
+                          placeholder: 'Where...',
+                        })}
+                        type="text"
+                        id="location"
+                        name="location"
+                        required
+                      />
+                      <div className="suggested-places-container-startCompany">
+                        {loading ? <div>...loading</div> : null}
+                        {suggestions.map((suggestion) => {
+                          const style = {
+                            backgroundColor: suggestion.active
+                              ? '#88a5bd'
+                              : '#fff',
+                            color: suggestion.active ? '#eee' : '#333',
+                            fontSize: '0.9rem',
+                          };
+
+                          return (
+                            <div
+                              className="suggested-place"
+                              key={suggestion.placeId}
+                              {...getSuggestionItemProps(suggestion, { style })}
+                            >
+                              {suggestion.description}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                }}
+              </PlacesAutocomplete>
             </div>
             <div className="profile-picture-input">
               <label className="custom-file-upload">

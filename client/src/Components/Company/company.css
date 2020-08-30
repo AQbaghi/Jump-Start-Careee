@@ -55,3 +55,65 @@ ul {
   color: white;
   list-style: none;
 }
+.city-form {
+  width: 100%;
+  position: relative;
+  height: 50px;
+  margin: 1.4rem 0 1.4rem 0rem;
+}
+
+.city-form input {
+  width: 100%;
+  height: 100%;
+  color: #595f6e;
+  padding-top: 14px;
+  font-size: 1rem;
+  border: none;
+  border-bottom: 1px solid #333;
+  outline: none;
+}
+
+.city-form label {
+  position: absolute;
+  bottom: 0;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.city-form label::after {
+  content: '';
+  position: absolute;
+  left: 0px;
+  bottom: 1;
+  height: 100%;
+  width: 100%;
+  border-bottom: 2px solid #5fa8d3;
+  transform: translateX(-100%);
+  transition: all 0.3s ease;
+}
+
+.city-form input:focus + .label-name .content-name,
+.city-form input:valid + .label-name .content-name {
+  transform: translateY(-150%);
+  font-size: 14px;
+  color: #88a5bd;
+}
+
+.city-form input:focus + .label-name::after,
+.city-form input:valid + .label-name::after {
+  transform: translateX(0%);
+}
+
+.suggested-places-container-startCompany {
+  display: block;
+  border-radius: 0 0 10px 10px;
+  border-right: solid 1px #ccc;
+  border-bottom: solid 1px #ccc;
+  border-left: solid 1px #ccc;
+  margin: 0rem auto 1rem auto;
+  width: 90%;
+  max-width: 42rem;
+  overflow: hidden;
+}

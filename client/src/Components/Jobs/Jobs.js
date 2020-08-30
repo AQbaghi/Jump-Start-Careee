@@ -12,7 +12,7 @@ class Jobs extends Component {
     this.props.getJobPosts();
   }
   render() {
-    console.log(this.props.jobPosts.companyAvatar);
+    console.log(this.props.jobPosts);
     return (
       <div className="jobs no-outline">
         <SearchBar />
@@ -52,7 +52,7 @@ class Jobs extends Component {
                   </div>
 
                   <p className="company-name">{jobPost.companyName}</p>
-                  <p className="location">{jobPost.location}</p>
+                  <p className="location">{jobPost.address}</p>
                   <p className="salary">{jobPost.salary}</p>
                   <p className="time-of-post">{jobPost.createdAt}</p>
                 </Link>
@@ -75,6 +75,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     getJobPosts: () => {
+      console.log(ownProps);
       dispatch(getJobsFromDB(ownProps));
     },
   };

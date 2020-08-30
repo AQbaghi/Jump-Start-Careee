@@ -40,7 +40,15 @@ const JobSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    location: {
+    address: {
+      type: String,
+      required: true,
+    },
+    lat: {
+      type: String,
+      required: true,
+    },
+    lng: {
       type: String,
       required: true,
     },
