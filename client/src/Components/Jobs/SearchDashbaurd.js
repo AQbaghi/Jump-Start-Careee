@@ -17,7 +17,6 @@ const SearchDashbaurd = (props) => {
     const jobTitle = document.querySelector('.input-feild #jobTitle').value;
     const address = document.querySelector('.input-feild #location').value;
     const latlng = await adressSelectHandler(address);
-    console.log(latlng);
 
     props.history.push(
       `/jobs?jobTitle=${jobTitle}&lat=${latlng.lat}&lng=${latlng.lng}`
@@ -105,6 +104,26 @@ const SearchDashbaurd = (props) => {
           <div className="filter"></div>
           <button className="signup-login-button">Search</button>
         </form>
+        <div id="previous-searches">
+          <p className="previous-search-header">previous searches</p>
+          <ul>
+            <li className="search-term">
+              <p>previous searches</p>
+            </li>
+            <li className="search-term">
+              <p>previous searches</p>
+            </li>
+            <li className="search-term">
+              <p>previous searches</p>
+            </li>
+            <li className="search-term">
+              <p>previous searches</p>
+            </li>
+            <li className="search-term">
+              <p>previous searches</p>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );

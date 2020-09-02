@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { auth } from './store/actions/authActions.js';
 import NavBar from './Components/Nav/NavBar.js';
@@ -71,6 +71,7 @@ class App extends Component {
               window.location.href = '/';
             }}
           />
+          <Redirect to="/" />
         </Switch>
       </div>
     );

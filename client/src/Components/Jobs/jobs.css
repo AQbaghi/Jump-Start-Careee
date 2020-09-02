@@ -81,9 +81,8 @@ body {
 /* jobs dashbaurd */
 
 .jobs-dashbaurd {
-  display: grid;
-  grid-template-columns: 18rem auto;
-  grid-auto-rows: minmax(90vh, auto);
+  max-width: 24rem;
+  margin: 0 auto;
 }
 
 /* the job post inself */
@@ -180,6 +179,13 @@ body {
   }
 }
 
+@media only screen and (min-width: 700px) {
+  .jobs-dashbaurd {
+    max-width: 43rem;
+    margin: 0 auto;
+  }
+}
+
 /* font styles */
 
 #jobTitle-jobPost {
@@ -214,7 +220,7 @@ body {
   transition: 0.4s;
 }
 .delete-job-post:hover {
-  background: #19222a;
+  background: #88a5bd;
   transition: 0.4s;
   cursor: pointer;
 }
@@ -247,4 +253,9 @@ body {
 .continue-button:hover {
   background-color: #19222a;
   transition: 0.3s;
+}
+
+.header-404 {
+  color: rgb(0, 80, 252);
+  font-size: 4rem;
 }

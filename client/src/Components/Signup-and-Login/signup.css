@@ -143,7 +143,7 @@ input[type='file'] {
 #verification-popUp {
   position: absolute;
   width: 100%;
-  height: 117vh;
+  height: 300vh;
   top: 0;
   background-color: rgba(0, 0, 0, 0.479);
 }
@@ -184,6 +184,9 @@ input[type='file'] {
     width: 80%;
     max-width: 24rem;
   }
+  #popUp img {
+    left: 20.5rem;
+  }
 }
 
 @media only screen and (max-width: 500px) {
@@ -197,5 +200,8 @@ input[type='file'] {
     margin: 0 auto;
     width: 60%;
     max-width: 18rem;
+  }
+  #popUp img {
+    left: 16rem;
   }
 }

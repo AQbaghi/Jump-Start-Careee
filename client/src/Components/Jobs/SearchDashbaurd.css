@@ -15,7 +15,7 @@
 
 .header {
   width: 70%;
-  max-width: 34rem;
+  max-width: 30rem;
   margin: 0 auto;
 }
 
@@ -69,6 +69,43 @@
   border-bottom: solid #ccc 1px;
 }
 
+#previous-searches {
+  border: solid white 1px;
+  border-radius: 5px;
+  width: 50%;
+  max-width: 20rem;
+  margin: 2rem auto;
+  color: white;
+  background: rgba(0, 15, 48, 0.664);
+  text-align: center;
+}
+.previous-search-header {
+  font-size: 1.3rem;
+  text-align: center;
+  padding: 0;
+  margin: 1rem;
+  display: inline-block;
+}
+#previous-searches ul {
+  padding: 0;
+  list-style: none;
+}
+.search-term {
+  border-top: rgba(255, 255, 255, 0.445) 1px solid;
+  padding: 1rem;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.search-term:hover {
+  transition: 0.3s;
+  background: rgba(0, 119, 255, 0.555);
+}
+.search-term a {
+  margin: 0;
+  color: white;
+  text-decoration: none;
+}
+
 @media only screen and (max-width: 660px) {
   .job-search-form .input-feild input {
     font-size: 1rem;
@@ -95,4 +132,12 @@
     margin: 1rem auto;
     max-width: 18rem;
   }
+}
+
+.jump-start-your-career {
+  padding: 1rem 0 0 0;
+  margin: 0;
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.842);
+  text-align: center;
 }

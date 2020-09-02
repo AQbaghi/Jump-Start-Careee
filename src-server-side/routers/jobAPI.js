@@ -48,7 +48,7 @@ router.get('/api/job/all-job', async (req, res) => {
   //qury link example
   // /api/job/all-job?limit=10&skip=0?catagory=WebDev
   let sortValue = -1;
-  let searchCriteriaObject = {};
+
   console.log(req.query);
   //finding any related data corisponding to search criteria via $or mongodb and $regex mongodb
   jobTitlesSearchCriteriaObject = {
@@ -59,17 +59,13 @@ router.get('/api/job/all-job', async (req, res) => {
       { companyName: { $regex: req.query.jobTitle, $options: 'i' } },
     ],
   };
+
+  let bigLat = Number(req.query.lat) + 0.23;
+  let smallLat = Number(req.query.lat) - 0.23;
+  let bigLng = Number(req.query.lng) + 0.23;
+  let smallLng = Number(req.query.lng) - 0.23;
+
   jobAdressSearchCriteriaObject = {
-    lat: req.query.lat,
-    lng: req.query.lng,
-  };
-
-  let bigLat = Number(req.query.lat) + 0.666;
-  let smallLat = Number(req.query.lat) - 0.666;
-  let bigLng = Number(req.query.lng) + 0.666;
-  let smallLng = Number(req.query.lng) - 0.666;
-
-  soc = {
     $and: [
       { lat: { $gte: smallLat } },
       { lat: { $lte: bigLat } },
@@ -80,7 +76,7 @@ router.get('/api/job/all-job', async (req, res) => {
 
   try {
     const job = await Job.find({
-      $and: [jobTitlesSearchCriteriaObject, soc],
+      $and: [jobTitlesSearchCriteriaObject, jobAdressSearchCriteriaObject],
     })
       .limit(parseInt(req.query.limit))
       .skip(parseInt(req.query.skip))
@@ -97,6 +93,18 @@ router.post('/api/job/my-jobs', auth, async (req, res) => {
   try {
     const job = await Job.find({ JobOwner: req.body._id });
     res.send(job);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
+
+//delete job post
+router.delete('/api/job/delete/:_id', async (req, res) => {
+  try {
+    const _id = req.params._id;
+    await Job.findByIdAndDelete(_id);
+
+    res.send({ success: 'Job Post Successfully deleted!' });
   } catch (err) {
     res.status(400).send(err);
   }
