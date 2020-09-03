@@ -20,6 +20,7 @@ const SearchDashbaurd = (props) => {
     const jobTitle = document.querySelector('.input-feild #jobTitle').value;
     const address = document.querySelector('.input-feild #location').value;
     const latlng = await adressSelectHandler(address);
+<<<<<<< HEAD
 
     //saving in local storage
     let previousSearches = JSON.parse(localStorage.getItem('previousSearches'));
@@ -30,6 +31,8 @@ const SearchDashbaurd = (props) => {
       previousSearches.searches.shift();
     }
     localStorage.setItem('previousSearches', JSON.stringify(previousSearches));
+=======
+>>>>>>> 644fee00d5deb69b4039aaa21fb3e1729108f854
 
     props.history.push(
       `/jobs?jobTitle=${jobTitle}&lat=${latlng.lat}&lng=${latlng.lng}`
@@ -126,6 +129,7 @@ const SearchDashbaurd = (props) => {
           <div className="filter"></div>
           <button className="signup-login-button">Search</button>
         </form>
+<<<<<<< HEAD
         {searchObj.searches[0] ? (
           <div id="previous-searches">
             <p className="previous-search-header">previous searches</p>
@@ -143,6 +147,28 @@ const SearchDashbaurd = (props) => {
             </ul>
           </div>
         ) : null}
+=======
+        <div id="previous-searches">
+          <p className="previous-search-header">previous searches</p>
+          <ul>
+            <li className="search-term">
+              <p>previous searches</p>
+            </li>
+            <li className="search-term">
+              <p>previous searches</p>
+            </li>
+            <li className="search-term">
+              <p>previous searches</p>
+            </li>
+            <li className="search-term">
+              <p>previous searches</p>
+            </li>
+            <li className="search-term">
+              <p>previous searches</p>
+            </li>
+          </ul>
+        </div>
+>>>>>>> 644fee00d5deb69b4039aaa21fb3e1729108f854
       </div>
     </div>
   );
