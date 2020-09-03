@@ -29,12 +29,9 @@ class StartCompany extends Component {
         lng: latLng.lng,
       };
     });
-
-    console.log(this.state.coordinates);
   };
 
   inputChangeHandler = (e) => {
-    console.log(e.target.id);
     this.setState({
       [e.target.id]: e.target.value,
     });
@@ -43,7 +40,6 @@ class StartCompany extends Component {
   submitHandler = async (e) => {
     e.preventDefault();
     await this.adressSelectHandler(this.state.address);
-    console.log(this.state);
     await this.props.dispatchCompanyInfo(this.state);
   };
 

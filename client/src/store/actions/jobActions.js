@@ -41,41 +41,54 @@ export const getJobDetailsFromDB = (ownProps, state) => {
       applyButton: false,
       AlreadyApplied: false,
       deleteJobPostButton: false,
+      pageDeleted: false,
     };
 
     //setting up the logic for the buttons
 
-    if (!state.userAccount.email) {
-      buttonState.signUp = true;
-      buttonState.applyButton = false;
-      buttonState.AlreadyApplied = false;
-      buttonState.deleteJobPostButton = false;
-    }
-    if (state.userAccount.email) {
-      buttonState.signUp = true;
-      buttonState.applyButton = false;
-      buttonState.AlreadyApplied = false;
-      buttonState.deleteJobPostButton = false;
-    }
-    if (state.userAccount.jobsAppliedTo) {
-      state.userAccount.jobsAppliedTo.map((jobAppliedTo) => {
-        if (jobAppliedTo.jobId === jobPostDetails.job._id) {
-          buttonState.signUp = false;
-          buttonState.applyButton = false;
-          buttonState.AlreadyApplied = true;
-          buttonState.deleteJobPostButton = false;
-        }
-      });
-    }
-    if (state.userAccount.companyInfo) {
-      if (
-        state.userAccount.companyInfo._id === jobPostDetails.companyInfo._id
-      ) {
-        buttonState.signUp = false;
+    try {
+      if (!state.userAccount.email) {
+        buttonState.signUp = true;
         buttonState.applyButton = false;
         buttonState.AlreadyApplied = false;
-        buttonState.deleteJobPostButton = true;
+        buttonState.deleteJobPostButton = false;
+        buttonState.pageDeleted = false;
       }
+      if (state.userAccount.email) {
+        buttonState.signUp = true;
+        buttonState.applyButton = false;
+        buttonState.AlreadyApplied = false;
+        buttonState.deleteJobPostButton = false;
+        buttonState.pageDeleted = false;
+      }
+      if (state.userAccount.jobsAppliedTo) {
+        state.userAccount.jobsAppliedTo.map((jobAppliedTo) => {
+          if (jobAppliedTo.jobId === jobPostDetails.job._id) {
+            buttonState.signUp = false;
+            buttonState.applyButton = false;
+            buttonState.AlreadyApplied = true;
+            buttonState.deleteJobPostButton = false;
+            buttonState.pageDeleted = false;
+          }
+        });
+      }
+      if (state.userAccount.companyInfo) {
+        if (
+          state.userAccount.companyInfo._id === jobPostDetails.companyInfo._id
+        ) {
+          buttonState.signUp = false;
+          buttonState.applyButton = false;
+          buttonState.AlreadyApplied = false;
+          buttonState.deleteJobPostButton = true;
+          buttonState.pageDeleted = false;
+        }
+      }
+    } catch (err) {
+      buttonState.signUp = false;
+      buttonState.applyButton = false;
+      buttonState.AlreadyApplied = false;
+      buttonState.deleteJobPostButton = false;
+      buttonState.pageDeleted = true;
     }
 
     dispatch({

@@ -39,7 +39,7 @@ class Profile extends Component {
         )}`;
       }
     }
-    console.log(this.props.account.auth.userAccount.jobsAppliedTo);
+
     return (
       <div className="profile profile-content">
         <div className="profile-cover"></div>
