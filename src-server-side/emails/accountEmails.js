@@ -23,13 +23,8 @@ const sendVerificationCodeToUser = (email, firstName, lastName, code) => {
       subject: 'Verification Code',
       text: `Hello ${firstName} ${lastName}, Your Verification code is: ${code}`,
     })
-    .then(() => {
-      console.log('Message sent');
-    })
-    .catch((error) => {
-      console.log(error.response.body);
-      // console.log(error.response.body.errors[0].message);
-    });
+    .then(() => {})
+    .catch((error) => {});
 };
 
 const sendCVToCompanyEmail = (
@@ -61,13 +56,8 @@ const sendCVToCompanyEmail = (
         },
       ],
     })
-    .then(() => {
-      console.log('Message sent');
-    })
-    .catch((error) => {
-      console.log('cv was not sent');
-      // console.log(error.response.body.errors[0].message);
-    });
+    .then(() => {})
+    .catch((error) => {});
 };
 
 module.exports = {

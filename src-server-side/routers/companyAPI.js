@@ -58,7 +58,6 @@ router.patch('/api/company/update', auth, async (req, res) => {
       .send({ error: 'you can only update a valid company entery' });
   }
   try {
-    updates.forEach((update) => console.log(change[update]));
     updates.forEach((update) => {
       company[update] = change[update];
     });
@@ -88,7 +87,6 @@ router.post(
   avatar.single('avatar'),
   async (req, res) => {
     const company = await Company.findOne({ owner: req.params._id });
-    console.log(company);
     const buffer = await sharp(req.file.buffer)
       .resize({ width: 400, height: 320 })
       .png()

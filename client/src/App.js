@@ -11,6 +11,7 @@ import login from './Components/Signup-and-Login/Login.js';
 import Profile from './Components/Company/Profile.js';
 import StartCompany from './Components/Company/StartCompany.js';
 import CreateJobPost from './Components/Company/CreateJob.js';
+import About from './Components/About/About.js';
 import Apply from './Components/Jobs/apply.js';
 import './App.css';
 
@@ -26,10 +27,6 @@ class App extends Component {
       },
       method: 'POST',
     });
-  };
-
-  clickedAnywhereHandler = (e) => {
-    console.log('do the nav bar button');
   };
 
   render() {
@@ -63,6 +60,7 @@ class App extends Component {
           <Route exact path="/createjobpost" component={CreateJobPost} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/apply/:_id" component={Apply} />
+          <Route exact path="/about" component={About} />
           <Route
             exact
             path="/logout"

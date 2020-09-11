@@ -59,11 +59,9 @@ export const cteareJobPost = (formState, ownProps) => {
   return async (dispatch, getState) => {
     const token = document.cookie;
 
-    console.log(
-      JSON.stringify({
-        ...formState,
-      })
-    );
+    JSON.stringify({
+      ...formState,
+    });
 
     //creating the company requiest
     const jobPostPropmise = await fetch('/api/job/post', {

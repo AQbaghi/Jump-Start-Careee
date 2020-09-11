@@ -24,15 +24,12 @@ router.post('/api/users/verifyemail', async (req, res) => {
   try {
     //check if user already exixst before creation
     const user = await User.findOne({ email: req.body.email });
-    console.log('email   ' + user);
     if (user) {
-      console.log({ error: 'user with email adress already exists' });
       throw new Error({ error: 'user with email adress already exists' });
     }
 
     //check if temperary user already exists to set only one verification code and make only one valid
     tempUser = await TempUser.findOne({ email: req.body.email });
-    console.log('email   ' + user);
     if (tempUser) {
       tempUser.verificationCode = code;
       //semd the email with code
@@ -73,16 +70,12 @@ router.post('/api/users/verifyemail', async (req, res) => {
 
 router.delete('/api/users/verifyemail/check', async (req, res) => {
   try {
-    console.log(req.body);
     const tempUser = await TempUser.findOne({
       email: req.body.email,
       verificationCode: req.body.verificationCode,
     });
-    console.log(tempUser);
     const prevTempUser = tempUser;
-    console.log(prevTempUser);
     await tempUser.delete();
-    console.log(tempUser);
     res.status(201).send(prevTempUser);
   } catch (err) {
     res.status(400).send(err);
@@ -218,7 +211,6 @@ router.post(
   avatar.single('avatar'),
   async (req, res) => {
     const user = await User.findById(req.params._id);
-    console.log(user);
     const buffer = await sharp(req.file.buffer)
       .resize({ width: 250, height: 250 })
       .png()

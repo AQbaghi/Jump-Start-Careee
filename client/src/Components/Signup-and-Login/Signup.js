@@ -58,7 +58,6 @@ class Signup extends Component {
       }),
     });
     const tempUserAccount = await tempUserAccountPropmise.json();
-    console.log(tempUserAccount);
     if (tempUserAccount.verifyEmail) {
       this.setState({
         showPopUP: true,
@@ -72,7 +71,6 @@ class Signup extends Component {
 
   createAccountHandler = (e) => {
     e.preventDefault();
-    console.log(this.state.verificationCode);
     this.props.dispatchSignupInfo(this.state);
   };
 
@@ -103,7 +101,6 @@ class Signup extends Component {
       });
 
       formData.append('avatar', file);
-      console.log(formData);
 
       //reading the file as data url
       reader.readAsDataURL(file);
@@ -208,7 +205,7 @@ class Signup extends Component {
           <div id="verification-popUp">
             <div id="popUp">
               <div onClick={this.closePopUp}>
-                <img src={cross} className="cross-close" />
+                <img src={cross} alt="" className="cross-close" />
               </div>
               <form onSubmit={this.createAccountHandler} id="inner-popUp">
                 <h2>Enter Verification Code</h2>
@@ -248,7 +245,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     dispatchSignupInfo: (formState) => {
-      console.log(formState);
       dispatch(signupUserAccount(formState, ownProps));
     },
   };

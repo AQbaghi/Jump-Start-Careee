@@ -18,7 +18,7 @@ let advantages = [];
 class CreateJobPost extends Component {
   state = {
     jobTitle: null,
-    catagory: 'Web Development',
+    secretKeyToFindJob: 'cheese',
     jobDescription: null,
     keyWords: [],
     requiredSkills: [],
@@ -34,7 +34,6 @@ class CreateJobPost extends Component {
         keyWord = e.target.value;
         break;
       case 'requiredSkills':
-        console.log('lol');
         requiredSkill = e.target.value;
         break;
       case 'responsabilities':
@@ -52,7 +51,7 @@ class CreateJobPost extends Component {
 
   submitHandler = (e) => {
     e.preventDefault();
-    console.log(this.state);
+
     this.setState(() => {
       //checking if input exists to add in array to set state with new array value
       if (keyWord) {
@@ -292,31 +291,3 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateJobPost);
-
-{
-  /* <div className="form">
-<input
-  type="text"
-  name="catagory"
-  list="jobCatagoty"
-  id="catagory"
-  required
-  autoComplete="off"
-  onChange={this.inputChangeHandler}
-/>
-<datalist id="jobCatagoty">
-  <option>web development</option>
-  <option>cloud engineer</option>
-  <option>electrical engineer</option>
-  <option>graphic designer</option>
-  <option>network engineer</option>
-  <option>penatration tester</option>
-  <option>customer service</option>
-  <option>help desk</option>
-  <option>software engineer</option>
-</datalist>
-<label htmlFor="catagory" className="label-name">
-  <span className="content">catagory</span>
-</label>
-</div> */
-}

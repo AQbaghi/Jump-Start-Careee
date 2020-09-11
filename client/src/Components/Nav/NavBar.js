@@ -92,7 +92,7 @@ const NavBar = ({ signup, login, logout, companyAuthenticated }) => {
         {companyAuthenticated ? CreateJobPostLink() : null}
         {login ? myProfile() : null}
         <li>
-          <Link className="nav-link" to="/">
+          <Link className="nav-link" to="/about">
             About
           </Link>
         </li>

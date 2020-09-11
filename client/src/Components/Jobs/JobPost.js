@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { _arrayBufferToBase64 } from '../../SettingsAndImageProcessors/_arrayBufferToBase64';
 import { getJobDetailsFromDB } from '../../store/actions/jobActions.js';
 import defaultCompanyImage from '../../images/PRIVATE-LIMITE.jpg';
+import { formatDistance, subDays } from 'date-fns';
 
 class JobPost extends Component {
   //state of the apply or delete button
@@ -25,7 +26,7 @@ class JobPost extends Component {
     }
     return (
       <div>
-        <img id="companyImage" src={companyPicture} />
+        <img id="companyImage" alt="" src={companyPicture} />
       </div>
     );
   };
@@ -104,7 +105,7 @@ class JobPost extends Component {
                 {this.props.jobPostDetails.job.companyAvatar ? (
                   <this.DisplayImageHandler />
                 ) : (
-                  <img id="companyImage" src={defaultCompanyImage} />
+                  <img id="companyImage" alt="" src={defaultCompanyImage} />
                 )}
                 <h2>{this.props.jobPostDetails.job.companyName}</h2>
                 {this.props.jobPostDetails.job.location ? (
@@ -157,7 +158,17 @@ class JobPost extends Component {
                     </ul>
                   </div>
                 ) : null}
-                <p>Postted at: {this.props.jobPostDetails.job.createdAt}</p>
+                <p>
+                  Posted:{' '}
+                  {formatDistance(
+                    subDays(
+                      new Date(this.props.jobPostDetails.job.createdAt),
+                      0
+                    ),
+                    new Date()
+                  )}{' '}
+                  ago
+                </p>
                 {this.props.jobPostDetails?.buttonState?.signUp ? (
                   <div
                     className="apply-to-job"
@@ -200,14 +211,6 @@ class JobPost extends Component {
     );
   }
 }
-
-// {showApplyButton ? (
-//   <div className="apply-to-job" onClick={this.applyToJobClickHandler}>
-//     Apply Now
-//   </div>
-// ) : (
-//   <div className="delete-job-post">Delete Job Post</div>
-// )}
 
 const mapStateToProps = (state, ownProps) => {
   return {

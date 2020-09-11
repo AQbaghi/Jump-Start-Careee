@@ -9,7 +9,6 @@ export const auth = (token) => {
       method: 'GET',
     });
     const authenticatedUser = await authenticatedPropmise.json();
-    console.log(authenticatedUser);
 
     try {
       const usersCompanyPropmise = await fetch('/api/company/me', {

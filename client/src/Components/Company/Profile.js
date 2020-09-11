@@ -122,7 +122,6 @@ class Profile extends Component {
                     {this.props.account.job.myCompanyJobs
                       ? this.props.account.job.myCompanyJobs.map(
                           (companyJob) => {
-                            console.log(companyJob);
                             let linkToJobPost = `/jobs/${companyJob._id}`;
                             return (
                               <li key={companyJob._id}>

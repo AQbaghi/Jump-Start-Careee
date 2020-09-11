@@ -6,13 +6,14 @@ import { _arrayBufferToBase64 } from '../../SettingsAndImageProcessors/_arrayBuf
 import SearchBar from './SearchBar.js';
 import './jobs.css';
 import defaultCompanyImage from '../../images/PRIVATE-LIMITE.jpg';
+import { formatDistance, subDays } from 'date-fns';
 
 class Jobs extends Component {
   componentWillMount() {
     this.props.getJobPosts();
   }
+
   render() {
-    console.log(this.props.jobPosts);
     return (
       <div className="jobs no-outline">
         <SearchBar />
@@ -30,6 +31,7 @@ class Jobs extends Component {
                     companyPictureBuffer
                   )}`;
                 }
+                console.log();
                 return (
                   <Link
                     className="job-post"
@@ -40,11 +42,13 @@ class Jobs extends Component {
                       {jobPost.companyAvatar ? (
                         <img
                           className="little-company-image"
+                          alt=""
                           src={companyPicture}
                         />
                       ) : (
                         <img
                           className="little-company-image"
+                          alt=""
                           src={defaultCompanyImage}
                         />
                       )}
@@ -54,7 +58,13 @@ class Jobs extends Component {
                     <p className="company-name">{jobPost.companyName}</p>
                     <p className="location">{jobPost.address}</p>
                     <p className="salary">{jobPost.salary}</p>
-                    <p className="time-of-post">{jobPost.createdAt}</p>
+                    <p className="time-of-post">
+                      {formatDistance(
+                        subDays(new Date(jobPost.createdAt), 0),
+                        new Date()
+                      )}{' '}
+                      ago
+                    </p>
                   </Link>
                 );
               })
@@ -100,7 +110,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     getJobPosts: () => {
-      console.log(ownProps);
       dispatch(getJobsFromDB(ownProps));
     },
   };

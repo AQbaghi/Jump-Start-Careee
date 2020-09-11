@@ -24,7 +24,6 @@ router.post('/api/job/post', auth, async (req, res) => {
     });
 
     await job.save();
-    console.log(job);
     res.status(201).send(job);
   } catch (err) {
     res.status(500).send(err);
@@ -43,18 +42,17 @@ router.get('/api/job/info/:_id', async (req, res) => {
   }
 });
 
-//view all jobs --must include search and pagination
+//view all jobs search
 router.get('/api/job/all-job', async (req, res) => {
   //qury link example
   // /api/job/all-job?limit=10&skip=0?catagory=WebDev
   let sortValue = -1;
 
-  console.log(req.query);
   //finding any related data corisponding to search criteria via $or mongodb and $regex mongodb
   jobTitlesSearchCriteriaObject = {
     $or: [
       { jobTitle: { $regex: req.query.jobTitle, $options: 'i' } },
-      { catagory: { $regex: req.query.jobTitle, $options: 'i' } },
+      { secretKeyToFindJob: { $regex: req.query.jobTitle, $options: 'i' } },
       { keyWords: { $regex: req.query.jobTitle, $options: 'i' } },
       { companyName: { $regex: req.query.jobTitle, $options: 'i' } },
     ],
@@ -89,7 +87,6 @@ router.get('/api/job/all-job', async (req, res) => {
 
 //view all my company job posts
 router.post('/api/job/my-jobs', auth, async (req, res) => {
-  console.log(req.body._id);
   try {
     const job = await Job.find({ JobOwner: req.body._id });
     res.send(job);

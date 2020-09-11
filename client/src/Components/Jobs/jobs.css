@@ -189,7 +189,10 @@ body {
 /* font styles */
 
 #jobTitle-jobPost {
-  color: #19222a;
+  color: #12324e;
+}
+.jobPost-details {
+  color: #356592;
 }
 
 .apply-to-job {

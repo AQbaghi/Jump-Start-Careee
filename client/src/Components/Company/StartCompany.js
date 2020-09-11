@@ -69,7 +69,6 @@ class StartCompany extends Component {
       });
 
       formDataObj.append('avatar', file);
-      console.log(formDataObj);
 
       //reading the file as data url
       reader.readAsDataURL(file);
@@ -210,7 +209,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     dispatchCompanyInfo: (formState) => {
-      console.log(formState);
       dispatch(startCompany(formState, ownProps));
     },
   };
