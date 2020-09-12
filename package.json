@@ -1,5 +1,5 @@
 {
-  "name": "web-dev-seaker",
+  "name": "jump-start-career",
   "version": "1.0.0",
   "description": "A MongoDB, Express, React, and Node.js web-app for people who want to land their first job in the Web-Dev Industy",
   "main": "index.js",
@@ -8,7 +8,8 @@
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "cd client && npm start",
-    "dev": "concurrently \"npm run server\" \"npm run client\" "
+    "dev": "concurrently \"npm run server\" \"npm run client\" ",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefic client && npm run build --prefix client"
   },
   "author": "AbdalQader Baghi",
   "license": "ISC",
